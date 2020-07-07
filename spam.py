@@ -8,7 +8,6 @@ import secrets
 import string
 import json
 
-chars = string.ascii_letters + string.digits + '!?*@$'
 alphabet = string.ascii_letters + string.digits
 random.seed = (os.urandom(1024))
 
@@ -19,6 +18,7 @@ password_field  = ''
 names 	    = json.loads(open('names.json').read())
 lastnames   = json.loads(open('lastnames.json').read())
 emails 	    = json.loads(open('emails.json').read())
+passwords   = json.loads(open('passwords.json').read())
 
 try:
 	for i in i:
@@ -32,12 +32,12 @@ try:
         name_extra = ''.join(str(random.randint(1, 999)))
 
 
-        usernamegen = [
+        namegen = [
             name.lower() + name_extra + email,
             name.lower() + '.' + lastname.lower() + email,
             name.lower() + '.' + lastname.lower() + name_extra + email
         ]
-        username = random.choice(usernamegen)
+        username = random.choice(namegen)
 
 
         lenght = random.randint(8, 18)
@@ -45,7 +45,8 @@ try:
             username + str(random.randint(100, 9999)),
             str(random.randint(100, 9999)) + username + str(random.randint(100, 9999)),
             str(random.randint(100, 9999)) + username,
-            ''.join(secrets.choice(alphabet) for i in range(lenght))
+            ''.join(secrets.choice(alphabet) for i in range(lenght)),
+            random.choice(passwords)
         ]
         password = random.choice(pwgen)
 
